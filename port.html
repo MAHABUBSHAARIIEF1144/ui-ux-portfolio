@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHAIK MAHABUB SHAARIIEF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080808;
+    --surface: #111;
+    --border: #1f1f1f;
+    --accent: #e8ff3c;
+    --text: #f0f0f0;
+    --muted: #555;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CURSOR */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width .2s, height .2s;
+    mix-blend-mode: difference;
+  }
+  .cursor.expand { width: 44px; height: 44px; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 48px;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  nav ul { list-style: none; display: flex; gap: 36px; }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    transition: color .2s;
+  }
+  nav a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 48px 64px;
+    overflow: hidden;
+  }
+  .hero-bg { position: absolute; inset: 0; }
+  .hero-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, #080808 0%, transparent 55%),
+                linear-gradient(to right, #080808 0%, transparent 60%);
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp .8s .3s forwards;
+  }
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    animation: fadeUp .9s .5s forwards;
+  }
+  .hero-title span { color: var(--accent); display: block; }
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 360px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp .9s .7s forwards;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 48px; right: 48px; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp .8s 1s forwards;
+  }
+  .scroll-line {
+    width: 1px; height: 56px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+    50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* LABEL */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 56px;
+  }
+  .section-label::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* CASE STUDY */
+  .case-study-section { padding: 100px 48px 120px; }
+
+  .cs-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #0e0e0e;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 2px;
+  }
+  .cs-hero-info {
+    padding: 64px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #111;
+  }
+  .cs-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+  .cs-hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 4.5vw, 68px);
+    line-height: 1;
+    letter-spacing: 0.03em;
+    margin-bottom: 20px;
+  }
+  .cs-hero-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 380px;
+    margin-bottom: 36px;
+  }
+  .cs-meta { display: flex; gap: 32px; }
+  .cs-meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .cs-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cs-meta-value { font-size: 13px; font-weight: 500; color: var(--text); }
+
+  .cs-hero-img {
+    position: relative;
+    overflow: hidden;
+    background: #3d4454;
+    min-height: 400px;
+  }
+  .cs-hero-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .8s cubic-bezier(.16,1,.3,1);
+    cursor: none;
+  }
+  .cs-hero:hover .cs-hero-img img { transform: scale(1.04); }
+
+  /* 3-UP GRID */
+  /* .cs-screens {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 2px;
+  } */
+   .cs-screens {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+  .cs-screen {
+    position: relative;
+    overflow: hidden;
+    background: #0e0e0e;
+    aspect-ratio: 16/10;
+    cursor: none;
+  }
+  .cs-screen img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .7s cubic-bezier(.16,1,.3,1), filter .5s;
+    filter: brightness(0.82);
+  }
+  .cs-screen:hover img { transform: scale(1.05); filter: brightness(1); }
+  .cs-screen-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px 24px;
+    background: linear-gradient(to top, rgba(0,0,0,0.88), transparent);
+    opacity: 0;
+    transition: opacity .35s;
+  }
+  .cs-screen:hover .cs-screen-label { opacity: 1; }
+  .cs-screen-label span { font-size: 13px; font-weight: 500; }
+  .cs-screen-label small {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    margin-top: 4px;
+  }
+
+  /* WIDE */
+  .cs-wide {
+    overflow: hidden;
+    position: relative;
+    cursor: none;
+  }
+  .cs-wide img {
+    width: 100%; height: 420px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    transition: transform .8s cubic-bezier(.16,1,.3,1), filter .5s;
+    filter: brightness(0.78);
+  }
+  .cs-wide:hover img { transform: scale(1.03); filter: brightness(1); }
+  .cs-wide-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 32px 40px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .cs-wide-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.04em;
+  }
+  .cs-wide-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* CONTACT */
+  .contact {
+    padding: 80px 48px 120px;
+    border-top: 1px solid var(--border);
+  }
+  .contact-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 40px;
+  }
+  .contact-heading em { color: var(--accent); font-style: normal; }
+  .contact-links { display: flex; gap: 40px; flex-wrap: wrap; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    transition: color .25s, border-color .25s;
+  }
+  .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  footer {
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+  }
+  footer p {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.97);
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+    padding: 64px;
+  }
+  .lightbox.open { display: flex; animation: fadeIn .3s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .lb-close {
+    position: absolute;
+    top: 28px; right: 36px;
+    font-size: 26px;
+    color: var(--muted); background: none; border: none;
+    cursor: none;
+    font-family: 'DM Mono', monospace;
+    transition: color .2s;
+    line-height: 1;
+  }
+  .lb-close:hover { color: var(--accent); }
+  .lightbox img {
+    max-width: 100%; max-height: 85vh;
+    object-fit: contain;
+    border: 1px solid #222;
+    box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+  }
+  .lb-caption {
+    position: absolute;
+    bottom: 28px; left: 0; right: 0;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .d1 { transition-delay: .05s; }
+  .d2 { transition-delay: .13s; }
+  .d3 { transition-delay: .21s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .hero { padding: 0 24px 48px; }
+    .case-study-section { padding: 60px 24px 80px; }
+    .cs-hero { grid-template-columns: 1fr; }
+    .cs-hero-img { min-height: 260px; }
+    .cs-screens { grid-template-columns: 1fr; }
+    .cs-screen-label { opacity: 1; }
+    .cs-wide img { height: 240px; }
+    .contact { padding: 60px 24px 80px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; padding: 20px 24px; }
+    body { cursor: auto; }
+    .cursor { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="#" class="nav-logo">SHAIK MAHABUB SHAARIIEF</a>
+  <ul>
+    <li><a href="#work">Work</a></li>
+    <li><a href="https://drive.google.com/file/d/11_6iy5xl8-hU0MArqahxeDTIhgRk3e8m/view?usp=sharing" target="_blank">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.pexels.com/videos/8675542/abstract-art-background-backgrounddesign-geometric-8675542.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1600" alt="bg" />
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow"></p>
+    <h1 class="hero-title">UI/UX<span>DESIGNER</span></h1>
+    <p class="hero-sub">Designing intuitive digital experiences — from concept to polished, pixel-perfect interfaces.</p>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<section class="case-study-section" id="work">
+  <div class="section-label reveal">Selected Project · 01</div>
+
+  <!-- HERO CARD -->
+  <div class="cs-hero reveal">
+    <div class="cs-hero-info">
+      <p class="cs-tag">Internship · UI/UX · 2022</p>
+      <h2 class="cs-hero-title">Food Printer Pvt Ltd</h2>
+      <p class="cs-hero-desc">A comprehensive recipe and kitchen management platform. Designed for restaurants and home chefs alike — featuring smart weekly scheduling, ingredient inventory tracking, and a rich recipe library with meal-type filters.</p>
+      <div class="cs-meta">
+        <div class="cs-meta-item">
+          <span class="cs-meta-label">Role</span>
+          <span class="cs-meta-value">UI/UX Design</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="cs-meta-label">Tools</span>
+          <span class="cs-meta-value">Adobe Xd</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="cs-meta-label">Screens</span>
+          <span class="cs-meta-value">5 Designed</span>
+        </div>
+      </div>
+    </div>
+    <div class="cs-hero-img">
+      <img
+        src="./images/2.png"
+        alt="PP App Home"
+        data-caption="Home — Today's Meal View"
+        onclick="openLb(this.src, this.dataset.caption)"
+      />
+       <div class="cs-screen-label">
+        <span>Login Screen</span>
+        <small>Auth · Google Sign-in</small>
+      </div>  
+    </div>
+  </div>
+
+ <div class="cs-screens" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;">
+  <div class="cs-screen reveal d1" onclick="openLb('./images/1.png','Splash Screen — Onboarding')">
+    <img src="./images/1.png" alt="Splash" />
+    <div class="cs-screen-label">
+      <span>Login Screen</span>
+      <small>Auth · Google Sign-in</small>
+    </div>
+  </div>
+
+  <div class="cs-screen reveal d2" onclick="openLb('./images/3.png','Login Screen — Authentication')">
+    <img src="./images/3.png" alt="Login" />
+    <div class="cs-screen-label">
+      <span>Menu Screen</span>
+      <small>Select the Cuisine</small>
+    </div>
+  </div>
+
+  <div class="cs-screen reveal d3" onclick="openLb('./images/4.png','Settings — Weekly Meal Planner')">
+    <img src="./images/4.png" alt="Weekly Planner" />
+    <div class="cs-screen-label">
+      <span>Weekly Planner</span>
+      <small>Settings · Scheduling</small>
+    </div>
+  </div>
+
+  <div class="cs-screen reveal d4" onclick="openLb('./images/5.png','Settings — Weekly Meal Planner')">
+    <img src="./images/5.png" alt="Weekly Planner" />
+    <div class="cs-screen-label">
+      <span>Weekly Planner</span>
+      <small>Settings · Scheduling</small>
+    </div>
+  </div>
+</div>
+  
+
+
+  <!-- WIDE -->
+  <div class="cs-wide reveal" onclick="openLb('./images/7.png','Menu — Recipe Browser with Filters')">
+    <img src="./images/7.png" alt="Menu" />
+    <div class="cs-wide-overlay">
+      <div class="cs-wide-title"></div>
+      <div class="cs-wide-tag">UI Design · Adobe XD</div>
+    </div>
+  </div>
+
+</section>
+
+<section class="contact" id="contact">
+  <div class="section-label reveal">Let's Connect</div>
+  <h2 class="contact-heading reveal">Get in<br><em>Touch</em></h2>
+  <div class="contact-links reveal">
+    <a href="mailto:sharuksmart1144@gmail.com" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      sharuksmart1144@gmail.com
+    </a>
+    <a href="https://drive.google.com/file/d/11_6iy5xl8-hU0MArqahxeDTIhgRk3e8m/view?usp=sharing" target="_blank" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Resume PDF
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2024 SHAIK MAHABUB SHAARIIEF</p>
+  <p>UI/UX Design · Motion · Adobe XD</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLb()">✕</button>
+  <img id="lbImg" src="" alt="" />
+  <p class="lb-caption" id="lbCaption"></p>
+</div>
+
+<script>
+  // Cursor
+  const cur = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cur.style.left = e.clientX + 'px';
+    cur.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button, .cs-screen, .cs-wide, .cs-hero-img img').forEach(el => {
+    el.addEventListener('mouseenter', () => cur.classList.add('expand'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('expand'));
+  });
+
+  // Reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Lightbox
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCap = document.getElementById('lbCaption');
+  function openLb(src, cap) { lbImg.src = src; lbCap.textContent = cap || ''; lb.classList.add('open'); }
+  function closeLb() { lb.classList.remove('open'); setTimeout(() => lbImg.src = '', 300); }
+  lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+</script>
+</body>
+</html>
