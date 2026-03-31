@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="./images/favic.png">
+<link rel="icon" type="image/png" href="./images/favic.png  ">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shaik Mahabub Shaariief</title>
+<title>SHAIK MAHABUB SHAARIIEF</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
@@ -62,14 +62,12 @@
   }
   nav ul { list-style: none; display: flex; gap: 36px; }
   nav a {
-    /* color: var(--muted); */
     font-family: 'Bebas Neue', sans-serif;
     color: white;
     text-decoration: none;
     font-size: 20px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    /* font-family: 'DM Mono', monospace; */
     transition: color .2s;
   }
   nav a:hover { color: var(--accent); }
@@ -95,7 +93,7 @@
     background: linear-gradient(to top, #080808 0%, transparent 55%),
                 linear-gradient(to right, #080808 0%, transparent 60%);
   }
-  .hero-content { position: relative; z-index: 2; }
+  .hero-content { position: relative; z-index: 2; flex: 1; }
   .hero-eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -118,13 +116,74 @@
   .hero-sub {
     margin-top: 24px;
     font-size: 15px;
-    /* color: var(--muted); */
     color: white;
     max-width: 360px;
     line-height: 1.7;
     opacity: 0;
     animation: fadeUp .9s .7s forwards;
   }
+
+  /* HERO PHOTO */
+  .hero-photo-wrap {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-bottom: 24px;
+    margin-right: 500px;
+    opacity: 0;
+    animation: fadeUp .9s .6s forwards;
+  }
+  .hero-photo-ring {
+    position: relative;
+    width: 340px;
+    height: 340px;
+  }
+  /* Decorative spinning dashed ring */
+  .hero-photo-ring::before {
+    content: '';
+    position: absolute;
+    inset: -14px;
+    border-radius: 50%;
+    border: 1px dashed rgba(232,255,60,0.35);
+    animation: spinRing 18s linear infinite;
+  }
+  /* Accent dot on the ring */
+  .hero-photo-ring::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 8px;
+    width: 10px;
+    height: 10px;
+    /* background: var(--accent); */
+    border-radius: 50%;
+    animation: spinRing 18s linear infinite;
+  }
+  @keyframes spinRing {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .hero-photo-circle {
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255,255,255,0.08);
+    background: #1a1a1a;
+    box-shadow: 0 0 80px rgba(232,255,60,0.12), 0 32px 80px rgba(0,0,0,0.6);
+  }
+  .hero-photo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(100%) contrast(1.05);
+    display: block;
+  }
+
   .hero-scroll {
     position: absolute;
     bottom: 48px; right: 48px; z-index: 2;
@@ -161,7 +220,6 @@
     font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    /* color: var(--muted); */
     color: white;
     margin-bottom: 56px;
   }
@@ -207,7 +265,6 @@
   }
   .cs-hero-desc {
     font-size: 14px;
-    /* color: var(--muted); */
     color: white;
     line-height: 1.75;
     max-width: 380px;
@@ -239,18 +296,11 @@
   }
   .cs-hero:hover .cs-hero-img img { transform: scale(1.04); }
 
-  /* 3-UP GRID */
-  /* .cs-screens {
+  .cs-screens {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 2px;
-    margin-bottom: 2px;
-  } */
-   .cs-screens {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2px;
-}
+  }
   .cs-screen {
     position: relative;
     overflow: hidden;
@@ -341,7 +391,6 @@
     align-items: center;
     gap: 12px;
     text-decoration: none;
-    /* color: var(--muted); */
     color: white;
     font-size: 13px;
     font-family: 'DM Mono', monospace;
@@ -362,7 +411,6 @@
   footer p {
     font-size: 11px;
     font-family: 'DM Mono', monospace;
-    /* color: var(--muted); */
     color: white;
     letter-spacing: 0.08em;
   }
@@ -420,7 +468,15 @@
 
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
-    .hero { padding: 0 24px 48px; }
+    .hero {
+      padding: 0 24px 48px;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      gap: 32px;
+    }
+    .hero-photo-wrap { margin-bottom: 0; }
+    .hero-photo-ring, .hero-photo-circle { width: 220px; height: 220px; }
     .case-study-section { padding: 60px 24px 80px; }
     .cs-hero { grid-template-columns: 1fr; }
     .cs-hero-img { min-height: 260px; }
@@ -451,11 +507,28 @@
   <div class="hero-bg">
     <img src="https://images.pexels.com/videos/8675542/abstract-art-background-backgrounddesign-geometric-8675542.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=900&w=1600" alt="bg" />
   </div>
+
+  <!-- LEFT: text content -->
   <div class="hero-content">
     <p class="hero-eyebrow"></p>
     <h1 class="hero-title">UI/UX<span>DESIGNER</span></h1>
     <p class="hero-sub">Designing intuitive digital experiences — from concept to polished, pixel-perfect interfaces.</p>
   </div>
+
+  <!-- RIGHT: circular photo -->
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-ring">
+      <div class="hero-photo-circle">
+        <!--
+          Replace the src below with your actual image path.
+          e.g. src="./images/sharuk.png"
+          Currently pointing to your uploaded file for preview.
+        -->
+        <img src="./images/sharuk.png" alt="Shaik Mahabub Shaariief" />
+      </div>
+    </div>
+  </div>
+
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span>Scroll</span>
@@ -493,48 +566,46 @@
         data-caption="Home — Today's Meal View"
         onclick="openLb(this.src, this.dataset.caption)"
       />
-       <div class="cs-screen-label">
+      <div class="cs-screen-label">
         <span>Login Screen</span>
         <small>Auth · Google Sign-in</small>
-      </div>  
+      </div>
     </div>
   </div>
 
- <div class="cs-screens" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;">
-  <div class="cs-screen reveal d1" onclick="openLb('./images/1.png','Splash Screen — Onboarding')">
-    <img src="./images/1.png" alt="Splash" />
-    <div class="cs-screen-label">
-      <span>Login Screen</span>
-      <small>Auth · Google Sign-in</small>
+  <div class="cs-screens" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;">
+    <div class="cs-screen reveal d1" onclick="openLb('./images/1.png','Splash Screen — Onboarding')">
+      <img src="./images/1.png" alt="Splash" />
+      <div class="cs-screen-label">
+        <span>Login Screen</span>
+        <small>Auth · Google Sign-in</small>
+      </div>
+    </div>
+
+    <div class="cs-screen reveal d2" onclick="openLb('./images/3.png','Login Screen — Authentication')">
+      <img src="./images/3.png" alt="Login" />
+      <div class="cs-screen-label">
+        <span>Menu Screen</span>
+        <small>Select the Cuisine</small>
+      </div>
+    </div>
+
+    <div class="cs-screen reveal d3" onclick="openLb('./images/4.png','Settings — Weekly Meal Planner')">
+      <img src="./images/4.png" alt="Weekly Planner" />
+      <div class="cs-screen-label">
+        <span>Weekly Planner</span>
+        <small>Settings · Scheduling</small>
+      </div>
+    </div>
+
+    <div class="cs-screen reveal d4" onclick="openLb('./images/5.png','Settings — Weekly Meal Planner')">
+      <img src="./images/5.png" alt="Weekly Planner" />
+      <div class="cs-screen-label">
+        <span>Weekly Planner</span>
+        <small>Settings · Scheduling</small>
+      </div>
     </div>
   </div>
-
-  <div class="cs-screen reveal d2" onclick="openLb('./images/3.png','Login Screen — Authentication')">
-    <img src="./images/3.png" alt="Login" />
-    <div class="cs-screen-label">
-      <span>Menu Screen</span>
-      <small>Select the Cuisine</small>
-    </div>
-  </div>
-
-  <div class="cs-screen reveal d3" onclick="openLb('./images/4.png','Settings — Weekly Meal Planner')">
-    <img src="./images/4.png" alt="Weekly Planner" />
-    <div class="cs-screen-label">
-      <span>Weekly Planner</span>
-      <small>Settings · Scheduling</small>
-    </div>
-  </div>
-
-  <div class="cs-screen reveal d4" onclick="openLb('./images/5.png','Settings — Weekly Meal Planner')">
-    <img src="./images/5.png" alt="Weekly Planner" />
-    <div class="cs-screen-label">
-      <span>Weekly Planner</span>
-      <small>Settings · Scheduling</small>
-    </div>
-  </div>
-</div>
-  
-
 
   <!-- WIDE -->
   <div class="cs-wide reveal" onclick="openLb('./images/7.png','Menu — Recipe Browser with Filters')">
