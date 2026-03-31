@@ -561,7 +561,7 @@
     </div>
     <div class="cs-hero-img">
       <img
-        src="./images/2.png"
+        src="./images/1.png"
         alt="PP App Home"
         data-caption="Home — Today's Meal View"
         onclick="openLb(this.src, this.dataset.caption)"
@@ -574,8 +574,8 @@
   </div>
 
   <div class="cs-screens" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;">
-    <div class="cs-screen reveal d1" onclick="openLb('./images/1.png','Splash Screen — Onboarding')">
-      <img src="./images/1.png" alt="Splash" />
+    <div class="cs-screen reveal d1" onclick="openLb('./images/2.png','Splash Screen — Onboarding')">
+      <img src="./images/2.png" alt="Splash" />
       <div class="cs-screen-label">
         <span>Login Screen</span>
         <small>Auth · Google Sign-in</small>
@@ -605,8 +605,28 @@
         <small>Settings · Scheduling</small>
       </div>
     </div>
+
+        <div class="cs-screen reveal d5" onclick="openLb('./images/list.png','Settings — Weekly Meal Planner')">
+          <img src="./images/list.png" alt="Weekly Planner" />
+          <div class="cs-screen-label">
+            <span>Weekly Planner</span>
+            <small>Settings · Scheduling</small>
+          </div>
+        </div>
+      
+
+    <div class="cs-screen reveal d6" onclick="openLb('./images/week.png','Settings — Weekly Meal Planner')">
+      <img src="./images/week.png" alt="Weekly Planner" />
+      <div class="cs-screen-label">
+        <span>Weekly Planner</span>
+        <small>Settings · Scheduling</small>
+      </div>
+    </div>
+  
+
   </div>
 
+  
   <!-- WIDE -->
   <div class="cs-wide reveal" onclick="openLb('./images/7.png','Menu — Recipe Browser with Filters')">
     <img src="./images/7.png" alt="Menu" />
